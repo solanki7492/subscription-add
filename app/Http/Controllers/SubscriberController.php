@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Subscriber;
+use App\Events\ConfirmSubscription;
 use Illuminate\Validation\Rule;
 
 class SubscriberController extends Controller

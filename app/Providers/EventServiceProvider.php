@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Events\ConfirmSubscription;
+use App\Listeners\SendConfirmation;
+use function Illuminate\Events\queueable;
+
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -18,6 +22,9 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        ConfirmSubscription::class => [
+            SendConfirmation::class,
+        ],
     ];
 
     /**
@@ -27,6 +34,13 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        // Event::listen(
+        //     ConfirmSubscription::class,
+        //     [SendConfirmation::class, 'handle']
+        // );
+
+        // Event::listen(queueable(function (ConfirmSubscription $event) {
+        //     //
+        // }));
     }
 }
